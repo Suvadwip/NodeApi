@@ -1,18 +1,20 @@
-const express= require("express")
-const mongoose= require("mongoose")
-require("dotenv").config()
-const app= express()
+const express = require("express");
+const mongoose = require("mongoose");
+require("dotenv").config();
+const app = express();
+const cors = require("cors");
 
 app.use(
   express.urlencoded({
-    extended: true
+    extended: true,
   })
-)
+);
+app.use(cors());
 
-const port= process.env.PORT || 7000
-const dbDriver= process.env.MONGO_DB_URL
-const router= require("./routes/routes")
-app.use("/api",router)
+const port = process.env.PORT || 7000;
+const dbDriver = process.env.MONGO_DB_URL;
+const router = require("./routes/routes");
+app.use("/api", router);
 
 mongoose
   .connect(dbDriver, {
